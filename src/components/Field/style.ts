@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export interface Properties {
     border?: string;
+    flex?: number;
 }
 
 const Input = styled.input<Properties>`
@@ -35,4 +36,9 @@ const ErrorText = styled.span`
     margin-left: 8px;
 `
 
-export {Input, Label, ErrorText};
+const LabelWrapper = styled.div<Properties>`
+    flex: ${props => props.flex};
+    width: 300px;
+`
+
+export {Input, Label, ErrorText, LabelWrapper};
