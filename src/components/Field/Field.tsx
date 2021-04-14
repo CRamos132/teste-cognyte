@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, Label} from './style'
+import {ErrorText, Input, Label} from './style'
 
 interface FieldProps {
     name: string;
@@ -7,6 +7,8 @@ interface FieldProps {
     placeholder: string;
     type?: string;
     value: string;
+    hasError?: boolean;
+    errorText?: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -17,18 +19,21 @@ const Field: React.FC<FieldProps> = ({
     type = 'text',
     value,
     onChange,
-    onBlur,
     placeholder,
+    hasError,
+    errorText,
     ...props
 }) => {
     return (
         <div>
             <Label htmlFor={`id_input_${name}`}>{label}</Label>
+            {hasError && <ErrorText>{errorText}</ErrorText>}
             <Input 
                 id={`id_input_${name}`} 
                 name={name} 
                 placeholder={placeholder}
                 value={value}
+                onChange={onChange}
                 {...props}
             />
         </div>

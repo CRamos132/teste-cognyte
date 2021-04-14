@@ -29,4 +29,10 @@ const Label = styled.label`
     color: black;
 `
 
-export {Input, Label};
+const ErrorText = styled.span`
+    color: red;
+    font-size: 0.8em;
+    margin-left: 8px;
+`
+
+export {Input, Label, ErrorText};
