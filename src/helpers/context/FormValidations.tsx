@@ -1,29 +1,38 @@
 import React from 'react'
 
-const semValidacao = (dados: string) => {
-    if(dados){
-        return { valid: true, text: "" }
-    } else {
-        return { valid: false, text: "Campo obrigatório" }
+const validateBasic = (dados: string) => {
+    if(!dados){
+        return { valid: false, text: "Campo obrigatório" }    
     }
-    // return { valid: false, text: "" }
+    return { valid: true, text: "" }
+}
+
+const validateNumber = (dados: string) => {
+    if(!dados){
+        return { valid: false, text: "Campo obrigatório" }    
+    }
+    if(Number(dados) < 0) {
+        return { valid: false, text: "Número negativo inválido" }    
+    }
+    return { valid: true, text: "" }
 }
 
 const validateCep = (dados: string) => {
-    if(dados === 'A'){
-        return { valid: false, text: "Erro" }
-    } else if (dados) {
-        return { valid: true, text: "" }
+    if(!dados){
+        return { valid: false, text: "Campo obrigatório" }    
     }
-    return { valid: false, text: "" }
+    if(dados.length !== 8){
+        return { valid: false, text: "CEP deve ter 8 dígitos" }
+    }
+    return { valid: true, text: "" }
 }
 
 const FormValidations = React.createContext({
     cep: validateCep, 
-    number: semValidacao, 
-    long: semValidacao, 
-    lat: semValidacao, 
-    quantidade: semValidacao
+    number: validateNumber, 
+    long: validateBasic, 
+    lat: validateBasic, 
+    quantidade: validateNumber
 });
 
 export default FormValidations

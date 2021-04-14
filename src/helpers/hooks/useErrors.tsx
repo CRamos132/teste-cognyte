@@ -9,7 +9,7 @@ interface validationInterface {
 const createInitialState = (validations: Record<string, (data: string) => validationInterface>) => {
     const initialState: Record<string, validationInterface> = {}
     for (let field in validations){
-        initialState[field] = {valid: true, text: "" }
+        initialState[field] = {valid: false, text: "" }
     }
     return initialState
 }
