@@ -57,6 +57,7 @@ const MainForm: React.FC = () => {
                         }
                     })
                 } else {
+                    alert('Formulário incompleto')
                     console.log(errors)
                 }
             }}>
