@@ -89,6 +89,20 @@ const MainForm: React.FC = () => {
                 </Row>
                 <Row>
                     <Field 
+                        name='quantidade' 
+                        value={quantidade} 
+                        label='Quantidade de moradores' 
+                        hasError={!errors.quantidade.valid}
+                        errorText={errors.quantidade.text}
+                        onChange={(event)=>{
+                            setQuantidade(event.target.value)
+                        }}
+                        onBlur={validateField}
+                        placeholder='XX'
+                    />
+                </Row>
+                <Row>
+                    <Field 
                         name='lat' 
                         value={lat} 
                         label='Latitude' 
@@ -115,20 +129,7 @@ const MainForm: React.FC = () => {
                         disabled
                     />
                 </Row>
-                <Row>
-                    <Field 
-                        name='quantidade' 
-                        value={quantidade} 
-                        label='Quantidade de moradores' 
-                        hasError={!errors.quantidade.valid}
-                        errorText={errors.quantidade.text}
-                        onChange={(event)=>{
-                            setQuantidade(event.target.value)
-                        }}
-                        onBlur={validateField}
-                        placeholder='XX'
-                    />
-                </Row>
+                <h3>Utilize o mapa abaixo para seleção da latitude e logitude</h3>
                 <MapWrapper>
                     <Map>
                         <MapClicker setPosition={setPosition} />

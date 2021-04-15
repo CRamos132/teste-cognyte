@@ -5,6 +5,7 @@ const MapWrapper = styled.div`
     min-width: 80%;
     max-width: 500px;
     position: relative;
+    margin: 16px;
 `
 
 export default MapWrapper
