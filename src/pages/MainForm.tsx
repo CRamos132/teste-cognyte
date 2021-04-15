@@ -1,7 +1,11 @@
 import React, {useState, useContext} from 'react'
+import { Marker, Popup } from 'react-leaflet'
 import { Button } from '../components/Button'
 import Field from '../components/Field/Field'
 import Form from '../components/Form'
+import Map from '../components/Map/Map'
+import MapClicker from '../components/MapClicker/MapClicker'
+import MapWrapper from '../components/MapWrapper'
 import PageWrapper from '../components/PageWrapper/PageWrapper'
 import Row from '../components/Row'
 import Title from '../components/Title'
@@ -16,6 +20,12 @@ const MainForm: React.FC = () => {
     const [quantidade, setQuantidade] = useState('')
     const validacoes = useContext(FormValidations)
     const [errors, validateField, isSendAllowed] = useErrors(validacoes)
+    const [position, setPositions] = useState<[number, number]>()
+    const setPosition = (latLong: {lat: number, lng: number}) => {
+        setLat(String(latLong.lat))
+        setLong(String(latLong.lng))
+        setPositions([latLong.lat, latLong.lng])
+    }
     return (
         <PageWrapper>
             <Title>Cadastrar nova residência</Title>
@@ -65,6 +75,7 @@ const MainForm: React.FC = () => {
                         }}
                         onBlur={validateField}
                         placeholder='XXXXXX-XX'
+                        disabled
                     />
                     <Field 
                         name='long' 
@@ -77,6 +88,7 @@ const MainForm: React.FC = () => {
                         }}
                         onBlur={validateField}
                         placeholder='XX'
+                        disabled
                     />
                 </Row>
                 <Row>
@@ -93,6 +105,18 @@ const MainForm: React.FC = () => {
                         placeholder='XX'
                     />
                 </Row>
+                <MapWrapper>
+                    <Map>
+                        <MapClicker setPosition={setPosition} />
+                        {position && (
+                            <Marker position={position}>
+                            <Popup>
+                                Cadastrar aqui.
+                            </Popup>
+                        </Marker>
+                        )}
+                    </Map>
+                </MapWrapper>
                 <Button type='submit'>Cadastrar</Button>
             </Form>
         </PageWrapper>
