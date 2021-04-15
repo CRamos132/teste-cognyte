@@ -14,7 +14,7 @@ const lowOption = {
     fillColor: 'orange',
     color: 'orange'
  }
- const hightOption = { 
+ const highOption = { 
     fillColor: 'red',
     color: 'red'
  }
@@ -24,13 +24,14 @@ const lowOption = {
  }
 const CadastroCircle: React.FC<CircleProps> = ({position, quantity}) => {
     const [color, setColor] = useState(lowOption)
+    const radius = 200 + (30 * quantity)
      const returnColor = (): {fillColor: string, color: string} => {
         if(quantity < 2){
             return lowOption
         } else if (quantity >= 2 && quantity < 4){
             return midOption
         } else if (quantity >= 4 && quantity < 6) {
-            return hightOption
+            return highOption
         } else {
             return highestOption
         }
@@ -43,7 +44,7 @@ const CadastroCircle: React.FC<CircleProps> = ({position, quantity}) => {
         <Circle 
             center={position} 
             pathOptions={color} 
-            radius={200} 
+            radius={radius} 
         />
     )
 }

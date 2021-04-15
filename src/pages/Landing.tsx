@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import CadastroCircle from '../components/CadastroCircle/CadastroCircle'
 import Map from '../components/Map/Map'
+import MapHelp from '../components/MapHelp/MapHelp'
 import MapWrapper from '../components/MapWrapper'
 import PageWrapper from '../components/PageWrapper/PageWrapper'
 import Title from '../components/Title'
@@ -22,6 +23,7 @@ const Landing: React.FC = () => {
         <PageWrapper>
             <Title>Residências cadastradas</Title>
             <MapWrapper>
+                <MapHelp />
                 <Map>
                     {cadastros.map((cadastro, index) => {
                         return (
