@@ -11,6 +11,7 @@ export interface Properties {
     iconAlt?: string;
     invert?: boolean;
     name?: string;
+    ariaLabel?: string;
 }
 
 const ButtonWrapper: React.FC<Properties> = ({

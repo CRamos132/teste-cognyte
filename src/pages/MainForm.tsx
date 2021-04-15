@@ -142,7 +142,7 @@ const MainForm: React.FC = () => {
                         )}
                     </Map>
                 </MapWrapper>
-                <Button type='submit'>Cadastrar</Button>
+                <Button type='submit' ariaLabel="Botão de envio do formulário">Cadastrar</Button>
             </Form>
         </PageWrapper>
     )
