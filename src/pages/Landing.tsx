@@ -26,9 +26,9 @@ const Landing: React.FC = () => {
                     {cadastros.map((cadastro, index) => {
                         return (
                             <CadastroCircle 
-                            key={`key_cadastro_${index}`}
-                            position={cadastro.position} 
-                            quantity={Number(cadastro.quantidade)} 
+                                key={`key_cadastro_${index}`}
+                                position={cadastro.position} 
+                                quantity={Number(cadastro.quantidade)} 
                             />
                         )    
                     })}

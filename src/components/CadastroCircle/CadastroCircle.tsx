@@ -18,6 +18,10 @@ const lowOption = {
     fillColor: 'red',
     color: 'red'
  }
+ const highestOption = { 
+    fillColor: '#400000',
+    color: '#400000'
+ }
 const CadastroCircle: React.FC<CircleProps> = ({position, quantity}) => {
     const [color, setColor] = useState(lowOption)
      const returnColor = (): {fillColor: string, color: string} => {
@@ -25,17 +29,16 @@ const CadastroCircle: React.FC<CircleProps> = ({position, quantity}) => {
             return lowOption
         } else if (quantity >= 2 && quantity < 4){
             return midOption
-        } else if (quantity >= 4) {
+        } else if (quantity >= 4 && quantity < 6) {
             return hightOption
         } else {
-            return midOption
+            return highestOption
         }
      }
      useEffect(()=>{
       const newColor = returnColor()
       setColor(newColor)
     }, [quantity])
-     //[-27.599177051919657, -48.54763727737235]
     return (
         <Circle 
             center={position} 
