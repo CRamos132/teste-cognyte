@@ -6,7 +6,7 @@ const Row = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    @media (max-width: 50px){
+    @media (max-width: 500px){
         flex-direction: column;
         justify-content: center;
     }
