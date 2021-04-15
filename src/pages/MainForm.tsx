@@ -21,7 +21,7 @@ const MainForm: React.FC = () => {
     const [long, setLong] = useState('')
     const validacoes = useContext(FormValidations)
     const [fields, updateFields] = useForm(validacoes)
-    const [errors, validateField, hasErrors] = useErrors(validacoes)
+    const [errors, validateField, hasNoErrors] = useErrors(validacoes)
     const [position, setPositions] = useState<[number, number]>()
     const setPosition = (latLong: {lat: number, lng: number}) => {
         setLat(String(latLong.lat))
@@ -33,7 +33,7 @@ const MainForm: React.FC = () => {
             <Title>Cadastrar nova residência</Title>
             <Form onSubmit={(event: React.FormEvent) => {
                 event.preventDefault()
-                if(hasErrors()){
+                if(hasNoErrors() && lat && long){
                     const newCadastro: Cadastro = {
                         position: [Number(lat), Number(long)],
                         cep: fields.cep,
@@ -100,8 +100,8 @@ const MainForm: React.FC = () => {
                         name='lat' 
                         value={lat} 
                         label='Latitude' 
-                        hasError={!errors.lat.valid}
-                        errorText={errors.lat.text}
+                        // hasError={!errors.lat.valid}
+                        // errorText={errors.lat.text}
                         onChange={(event)=>{
                             setLat(event.target.value)
                         }}
@@ -113,8 +113,8 @@ const MainForm: React.FC = () => {
                         name='long' 
                         value={long} 
                         label='Longitude' 
-                        hasError={!errors.long.valid}
-                        errorText={errors.long.text}
+                        // hasError={!errors.long.valid}
+                        // errorText={errors.long.text}
                         onChange={(event)=>{
                             setLong(event.target.value)
                         }}

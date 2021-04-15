@@ -29,9 +29,7 @@ const validateCep = (dados: string) => {
 
 const FormValidations = React.createContext({
     cep: validateCep, 
-    number: validateNumber, 
-    long: validateBasic, 
-    lat: validateBasic, 
+    number: validateNumber,
     quantidade: validateNumber
 });
 
