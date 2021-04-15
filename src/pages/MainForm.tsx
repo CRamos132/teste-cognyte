@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { Marker, Popup } from 'react-leaflet'
+import {useHistory} from 'react-router-dom'
 import { Button } from '../components/Button'
 import Field from '../components/Field/Field'
 import Form from '../components/Form'
@@ -11,8 +12,10 @@ import Row from '../components/Row'
 import Title from '../components/Title'
 import FormValidations from '../helpers/context/FormValidations'
 import useErrors from '../helpers/hooks/useErrors'
+import Cadastro from '../helpers/interfaces/Cadastro'
 
 const MainForm: React.FC = () => {
+    const history = useHistory()
     const [cep, setCep] = useState('')
     const [number, setNumber] = useState('')
     const [lat, setLat] = useState('')
@@ -32,7 +35,27 @@ const MainForm: React.FC = () => {
             <Form onSubmit={(event: React.FormEvent) => {
                 event.preventDefault()
                 if(isSendAllowed()){
-                    console.log(cep, number, lat, long, quantidade)
+                    const newCadastro: Cadastro = {
+                        position: [Number(lat), Number(long)],
+                        cep: cep,
+                        numero: number,
+                        quantidade: quantidade
+                    }
+                    const body = JSON.stringify(newCadastro)
+                    fetch('http://localhost:8080/cadastros', {
+                        method: 'POST',
+                        headers: new Headers({
+                            'Content-type': 'application/json',
+                        }),
+                        body: body,
+                    }).then(response => {
+                        if(response.ok){
+                            alert('Cadastro realizado com sucesso')
+                            history.push('/')
+                        } else {
+                            alert('Algo deu errado, tente novamente')
+                        }
+                    })
                 } else {
                     console.log(errors)
                 }

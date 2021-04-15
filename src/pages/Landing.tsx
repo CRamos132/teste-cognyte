@@ -4,14 +4,7 @@ import Map from '../components/Map/Map'
 import MapWrapper from '../components/MapWrapper'
 import PageWrapper from '../components/PageWrapper/PageWrapper'
 import Title from '../components/Title'
-
-interface Cadastro {
-    position: [number, number];
-    cep: string;
-    quantidade: string;
-    numero: string;
-    id: number;
-}
+import Cadastro from '../helpers/interfaces/Cadastro'
 
 const Landing: React.FC = () => {
     const [cadastros, setCadastros] = useState<Cadastro[]>([])
