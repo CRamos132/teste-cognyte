@@ -12,17 +12,16 @@ import Row from '../components/Row'
 import Title from '../components/Title'
 import FormValidations from '../helpers/context/FormValidations'
 import useErrors from '../helpers/hooks/useErrors'
+import useForm from '../helpers/hooks/UseForm'
 import Cadastro from '../helpers/interfaces/Cadastro'
 
 const MainForm: React.FC = () => {
     const history = useHistory()
-    const [cep, setCep] = useState('')
-    const [number, setNumber] = useState('')
     const [lat, setLat] = useState('')
     const [long, setLong] = useState('')
-    const [quantidade, setQuantidade] = useState('')
     const validacoes = useContext(FormValidations)
-    const [errors, validateField, isSendAllowed] = useErrors(validacoes)
+    const [fields, updateFields] = useForm(validacoes)
+    const [errors, validateField, hasErrors] = useErrors(validacoes)
     const [position, setPositions] = useState<[number, number]>()
     const setPosition = (latLong: {lat: number, lng: number}) => {
         setLat(String(latLong.lat))
@@ -34,13 +33,14 @@ const MainForm: React.FC = () => {
             <Title>Cadastrar nova residência</Title>
             <Form onSubmit={(event: React.FormEvent) => {
                 event.preventDefault()
-                if(isSendAllowed()){
+                if(hasErrors()){
                     const newCadastro: Cadastro = {
                         position: [Number(lat), Number(long)],
-                        cep: cep,
-                        numero: number,
-                        quantidade: quantidade
+                        cep: fields.cep,
+                        numero: fields.number,
+                        quantidade: fields.quantidade
                     }
+                    console.log(newCadastro)
                     const body = JSON.stringify(newCadastro)
                     fetch('http://localhost:8080/cadastros', {
                         method: 'POST',
@@ -64,39 +64,33 @@ const MainForm: React.FC = () => {
                 <Row>
                     <Field 
                         name='cep' 
-                        value={cep} 
+                        value={fields.cep} 
                         label='CEP' 
                         hasError={!errors.cep.valid}
                         errorText={errors.cep.text}
-                        onChange={(event)=>{
-                            setCep(event.target.value)
-                        }}
+                        onChange={updateFields}
                         onBlur={validateField}
                         placeholder='XXXXXX-XX'
                     />
                     <Field 
                         name='number' 
-                        value={number} 
+                        value={fields.number} 
                         label='Número' 
                         hasError={!errors.number.valid}
                         errorText={errors.number.text}
                         onBlur={validateField}
-                        onChange={(event)=>{
-                            setNumber(event.target.value)
-                        }}
+                        onChange={updateFields}
                         placeholder='XX'
                     />
                 </Row>
                 <Row>
                     <Field 
                         name='quantidade' 
-                        value={quantidade} 
+                        value={fields.quantidade} 
                         label='Quantidade de moradores' 
                         hasError={!errors.quantidade.valid}
                         errorText={errors.quantidade.text}
-                        onChange={(event)=>{
-                            setQuantidade(event.target.value)
-                        }}
+                        onChange={updateFields}
                         onBlur={validateField}
                         placeholder='XX'
                     />
