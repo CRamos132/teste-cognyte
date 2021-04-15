@@ -1,20 +1,44 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import CadastroCircle from '../components/CadastroCircle/CadastroCircle'
 import Map from '../components/Map/Map'
 import MapWrapper from '../components/MapWrapper'
 import PageWrapper from '../components/PageWrapper/PageWrapper'
 import Title from '../components/Title'
 
+interface Cadastro {
+    position: [number, number];
+    cep: string;
+    quantidade: string;
+    numero: string;
+    id: number;
+}
+
 const Landing: React.FC = () => {
-    
+    const [cadastros, setCadastros] = useState<Cadastro[]>([])
+    useEffect(()=>{
+        fetch('http://localhost:8080/cadastros').then(async response => {
+            const data = await response.json()
+            if(response.status === 200){
+                setCadastros(data)
+            } else {
+                alert('Algo deu errado')
+            }
+        })
+    },[])
     return (
         <PageWrapper>
             <Title>Residências cadastradas</Title>
             <MapWrapper>
                 <Map>
-                    <CadastroCircle position={[-27.59187466137091, -48.55210069634643]} quantity={1} />
-                    <CadastroCircle position={[-27.599177051919657, -48.54763727737235]} quantity={2} />
-                    <CadastroCircle position={[-27.591418245810043, -48.54110990475546]} quantity={4} />
+                    {cadastros.map((cadastro, index) => {
+                        return (
+                            <CadastroCircle 
+                            key={`key_cadastro_${index}`}
+                            position={cadastro.position} 
+                            quantity={Number(cadastro.quantidade)} 
+                            />
+                        )    
+                    })}
                 </Map>
             </MapWrapper>
         </PageWrapper>
