@@ -10,13 +10,13 @@ Para iniciar o projeto você deve utilizar os seguintes comandos na pasta raíz 
 
 Irá instalar todas as dependências do projeto
 
+### `yarn server`
+
+Iniciará o servidor projeto [na porta 8080](http://localhost:8080)
+
 ### `yarn start`
 
 Iniciará o projeto [no browser](http://localhost:3000)
-
-### `yarn serve`
-
-Iniciará o servidor projeto [na porta 8080](http://localhost:8080)
 
 ## Tecnologias utilizadas
 
