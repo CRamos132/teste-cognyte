@@ -10,6 +10,7 @@ interface FieldProps {
     hasError?: boolean;
     errorText?: string;
     flex?: number;
+    disabled?: boolean;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
