@@ -1,6 +1,4 @@
-# Teste para dev front end Cognyte
-
-Este projeto foi criado como teste para a empresa Cognyte e consiste em um formulário de cadastro para residências e um mapa de calor baseado na quantidade de pessoas que moram em cada residência.
+Este projeto consiste em um formulário de cadastro para residências e um mapa de calor baseado na quantidade de pessoas que moram em cada residência.
 
 ## Instruções do projeto
 
